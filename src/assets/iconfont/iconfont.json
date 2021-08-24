@@ -1,0 +1,100 @@
+{
+  "id": "2630892",
+  "name": "运营管理后台",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "23087706",
+      "name": "画像中心",
+      "font_class": "huaxiangzhongxin",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "6241665",
+      "name": "前台大屏",
+      "font_class": "qiantaidaping",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "22829590",
+      "name": "字典管理",
+      "font_class": "zidianguanli",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "22829591",
+      "name": "问卷中心",
+      "font_class": "wenjuanzhongxin",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "22829592",
+      "name": "资讯中心",
+      "font_class": "zixunzhongxin",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "22829593",
+      "name": "用户中心",
+      "font_class": "yonghuzhongxin",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "22829594",
+      "name": "机构维护",
+      "font_class": "jigouweihu",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "22442923",
+      "name": "用户管理-01",
+      "font_class": "yonghuguanli-01",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "22442924",
+      "name": "资讯中心-01",
+      "font_class": "zixunzhongxin-01",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
+      "icon_id": "22442925",
+      "name": "字典管理-01",
+      "font_class": "zidianguanli-01",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "22442926",
+      "name": "机构维护-01",
+      "font_class": "jigouweihu-01",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "22442927",
+      "name": "问卷中心-01",
+      "font_class": "wenjuanzhongxin-01",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "22442928",
+      "name": "日期-01",
+      "font_class": "riqi-01",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    }
+  ]
+}

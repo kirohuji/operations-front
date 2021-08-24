@@ -38,6 +38,7 @@
     "vue-router": "3.0.2",
     "vue-splitpane": "1.0.4",
     "vuedraggable": "2.20.0",
+    "lourd_components": "^0.1.15",
     "vuex": "3.1.0",
     "vuex-connect": "^2.2.0",
     "xlsx": "0.14.1"
