@@ -31,14 +31,14 @@
     "screenfull": "4.2.0",
     "script-loader": "0.7.2",
     "sortablejs": "1.8.4",
-    "vue": "2.6.10",
+    "vue": "2.6.11",
     "vue-count-to": "1.0.13",
     "vue-cropper": "^0.5.6",
     "vue-hoc": "^0.4.7",
     "vue-router": "3.0.2",
     "vue-splitpane": "1.0.4",
     "vuedraggable": "2.20.0",
-    "lourd_components": "^0.1.15",
+    "lourd_components": "^0.1.21",
     "vuex": "3.1.0",
     "vuex-connect": "^2.2.0",
     "xlsx": "0.14.1"
@@ -70,7 +70,7 @@
     "serve-static": "1.13.2",
     "svg-sprite-loader": "4.1.3",
     "svgo": "1.2.0",
-    "vue-template-compiler": "2.6.10"
+    "vue-template-compiler": "2.6.11"
   },
   "browserslist": [
     "> 1%",

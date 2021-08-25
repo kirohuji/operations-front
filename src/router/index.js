@@ -24,7 +24,7 @@ export const constantRoutes = [
   /** 首页 */
   {
     path: '/',
-    redirect: '/portrait/portraitmanage'
+    redirect: '/person/'
   },
   {
     path: '/person',
