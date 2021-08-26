@@ -1,5 +1,25 @@
-import { organizationService } from './service'
+import { organizationService, roleService } from './service'
 import { deleteChildren } from '@/utils'
+const rNameOption = function() {
+  return {
+    runner: roleService.find.bind(roleService),
+    variables: {
+      type: localStorage.getItem('selectedTab'),
+      node_id: this.template.currentState.dataSearchForm.node_name[
+        this.template.currentState.dataSearchForm.node_name.length - 1
+      ]
+    },
+    default: [],
+    callback: (data) => {
+      return data.list.map((item) => {
+        return {
+          label: item.r_id,
+          showLabel: item.name
+        }
+      })
+    }
+  }
+}
 const orgOptions = function() {
   return {
     cache: 'node_name',
@@ -9,10 +29,7 @@ const orgOptions = function() {
       {
         o_id: Number(localStorage.getItem('selectedTab')) - 1
       },
-      (data) => {
-        debugger
-        return deleteChildren(data.list)
-      }
+      (data) => deleteChildren(data.list)
     ]
   }
 }
@@ -35,19 +52,24 @@ export default {
       width: '450',
       add: true,
       order: 1,
-      use: 'cascader',
+      use: 'base-cascader',
       size: 'small',
       expandTrigger: 'hover',
       'collapse-tags': true,
-      cache: 'node_name',
+      // cache: 'node_name',
       options: orgOptions,
       props: {
         value: 'node_id',
         label: 'name',
         checkStrictly: false
       },
-      searcher: {},
+      searcher: {
+        isReal: true,
+        default: [51]
+      },
       forms: {
+        edit: false,
+        add: false,
         default: function() {
           if (this.template) {
             return this.template.currentState.dataSearchForm.node_name
@@ -61,19 +83,19 @@ export default {
     {
       prop: 'r_name',
       label: '所属角色',
-      width: '435',
+      width: '453',
       size: 'small',
       isHide: () => {
         return localStorage.getItem('selectedTab') === '1'
       },
       forms: {
+        prop: 'r_id',
         use: 'radio-group',
         class: 'radio-border-group',
-        children: () => {
+        children: function() {
           return {
-            use: 'radio',
-            cache: 'r_name',
-            options: () => []
+            use: 'base-radio',
+            options: rNameOption.call(this)
           }
         }
       }
@@ -124,7 +146,8 @@ export default {
     layout: {
       use: 'inline'
     },
-    create: '新建用户'
+    add: '新建用户',
+    edit: '编辑用户'
   },
   forms: {
     forms: [

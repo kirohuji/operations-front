@@ -24,7 +24,30 @@ export const constantRoutes = [
   /** 首页 */
   {
     path: '/',
-    redirect: '/person/'
+    redirect: '/portrait/portraitmanage'
+  },
+  {
+    path: '/portrait',
+    component: Layout,
+    name: 'portrait',
+    alwaysShow: true,
+    meta: {
+      title: '画像中心',
+      icon: 'iconfont icon icon-qiantaidaping',
+      code: 'portrait'
+    },
+    children: [
+      {
+        path: 'default',
+        redirect: 'portraitmanage'
+      },
+      {
+        path: 'portraitmanage',
+        component: () => import('@/views/portraitmanage/index'),
+        name: 'portraitmanage',
+        meta: { title: '画像管理', affix: true, code: 'portraitmanage' }
+      }
+    ]
   },
   {
     path: '/person',

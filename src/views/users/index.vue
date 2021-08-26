@@ -1,14 +1,16 @@
 <template>
   <div>
-    <EditTable ref="editTable" :config="config" />
+    <EditTable ref="editTable" v-loading="tableData.loading" :config="config" @events="handleEvents" />
   </div>
 </template>
 
 <script>
+import selectedTab from '../../mixins/selectedTab'
+import EditTable from '@/components/templates/EditTable'
 import config from './config'
 import { service } from './service'
-import selectedTab from '../../mixins/selectedTab'
 export default {
+  components: { EditTable },
   mixins: [selectedTab],
   data() {
     return {
@@ -36,33 +38,95 @@ export default {
     }
   },
   methods: {
+    handleEvents(payload) {
+      switch (payload.name) {
+        case 'submit':
+          // eslint-disable-next-line no-case-declarations
+          const form = {
+            ...payload.currentSelect,
+            ...payload.data.data
+          }
+          if (Array.isArray(form.node_id)) {
+            form.node_id = form.node_id[form.node_id.length - 1]
+          }
+          switch (payload.data.mode) {
+            case 'edit':
+              service
+                .update({
+                  ...form,
+                  type: this.type
+                })
+                .then(() => {
+                  this.$message.success('编辑成功')
+                  this.$refs.editTable.dialogClose()
+                  this.refresh()
+                })
+              break
+            case 'add':
+              service
+                .insert({
+                  ...form,
+                  type: this.type
+                })
+                .then(() => {
+                  this.$message.success('新建成功')
+                  this.$refs.formDialog.dialogClose()
+                  this.refresh()
+                })
+              break
+          }
+          break
+        case 'findOne':
+          service
+            .findOne({
+              ...payload.data,
+              type: this.type
+            })
+            .then(({ data }) => {
+              this.$refs.editTable.handleEdit({
+                ...payload.data,
+                ...data
+              })
+            })
+          break
+        case 'trigger':
+          service
+            .delin({
+              type: payload.data.status === 'ban' ? 1 : 2,
+              user_id: payload.data.user_id,
+              ...this.searcher
+            })
+            .then(() => {
+              this.$message.success('操作成功')
+              this.refresh()
+            })
+          break
+        default:
+          this.refresh()
+      }
+    },
+    //   用户管理  本人禁用禁止
+    checkUseList(value) {
+      var user = JSON.parse(localStorage.getItem('user'))
+      for (let i = 0; i < value.length; i++) {
+        if (value[i].user_id === user.user_id) {
+          value[i].disabled = 1
+        }
+      }
+      return value
+    },
     refresh() {
       this.$nextTick(() => {
         const payload = this.$refs.editTable.refresh()
         const node_id =
           String(this.type) === '1' ? '0' : payload.dataSearchForm.node_name[payload.dataSearchForm.node_name.length - 1]
+
         this.tableData.refresh({
           ...payload.dataTable,
           ...payload.dataSearchForm,
           node_id
         })
       })
-    },
-    handleUpdate(row) {
-      service
-        .findOne({
-          ...row,
-          type: this.type
-        })
-        .then(({ data }) => {
-          console.log(data)
-          this.table.selected = data
-          this.$refs.formDialog.open()
-          this.key++
-          this.$nextTick(() => {
-            this.$refs.dataForm.resetFields()
-          })
-        })
     }
   }
 }

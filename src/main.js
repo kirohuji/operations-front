@@ -17,15 +17,17 @@ import * as filters from './filters' // global filters
 import LourdComponents from 'lourd_components'
 import ThenableProvider from 'lourd_components/src/plugins/thenable'
 import BaseSearch from './components/molecules/BaseSearch'
+import BaseCascader from './components/molecules/BaseCascader/cascader/src/cascader.vue'
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
   // locale: enLang // 如果使用中文，无需设置，请删除
 })
-Vue.prototype.$cache = {};
+Vue.prototype.$cache = {}
 Vue.use(ThenableProvider)
 Vue.use(LourdComponents, {
   baseEnter: {
-    search: BaseSearch
+    search: BaseSearch,
+    'base-cascader': BaseCascader
   }
 })
 Object.keys(filters).forEach((key) => {

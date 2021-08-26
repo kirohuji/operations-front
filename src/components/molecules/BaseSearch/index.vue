@@ -1,19 +1,14 @@
 <template>
   <el-input v-bind="$attrs" v-on="$listeners">
-    <el-button
-      slot="append"
-      type="primary"
-      @click="() => dispatch('DataSearchForm', 'search')"
-      >搜索</el-button
-    >
+    <el-button slot="append" type="primary" @click="() => dispatch('DataSearchForm', 'search')">搜索</el-button>
   </el-input>
 </template>
 
 <script>
-import emitter from "element-ui/src/mixins/emitter";
+import emitter from 'element-ui/src/mixins/emitter'
 export default {
-  mixins: [emitter],
-};
+  mixins: [emitter]
+}
 </script>
 
 <style scoped lang="scss">
