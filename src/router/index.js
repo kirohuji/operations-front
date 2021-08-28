@@ -68,6 +68,48 @@ export const constantRoutes = [
         component: () => import('@/views/users/index.vue'),
         name: 'users',
         meta: { title: '用户管理', affix: false, code: 'usermanage' }
+      },
+      {
+        path: 'roles',
+        component: () => import('@/views/roles/index'),
+        name: 'roles',
+        meta: { title: '角色管理', affix: false, code: 'rolemanage' }
+      }
+    ]
+  },
+  {
+    path: '/organmanage',
+    component: Layout,
+    name: 'dictionaries',
+    meta: {
+      title: '机构维护',
+      icon: 'iconfont icon-jigouweihu-01',
+      code: 'organization'
+    },
+    children: [
+      {
+        path: '/organmanage',
+        component: () => import('@/views/organmanage/index'),
+        name: 'organmanage',
+        meta: { title: '机构维护', affix: false }
+      }
+    ]
+  },
+  {
+    path: '/dictionaries',
+    component: Layout,
+    name: 'dictionaries',
+    meta: {
+      title: '字典管理',
+      icon: 'iconfont icon-zidianguanli-01',
+      code: 'dictionaries'
+    },
+    children: [
+      {
+        path: '/dictionaries',
+        component: () => import('@/views/dicmanage/index'),
+        name: 'dicmanage',
+        meta: { title: '字典管理', affix: false }
       }
     ]
   }

@@ -5,9 +5,9 @@ const rNameOption = function() {
     runner: roleService.find.bind(roleService),
     variables: {
       type: localStorage.getItem('selectedTab'),
-      node_id: this.template.currentState.dataSearchForm.node_name[
-        this.template.currentState.dataSearchForm.node_name.length - 1
-      ]
+      node_id: Object.keys(this.template.currentSelect).length
+        ? this.template.currentSelect.node_id
+        : this.template.currentState.dataSearchForm.node_name[this.template.currentState.dataSearchForm.node_name.length - 1]
     },
     default: [],
     callback: (data) => {
@@ -43,7 +43,9 @@ export default {
         size: 'small',
         order: 2,
         placeholder: '请输入内容',
-        use: 'input'
+        use: 'input',
+        required: true,
+        rules: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
       }
     },
     {
@@ -68,8 +70,10 @@ export default {
         default: [51]
       },
       forms: {
+        prop: 'node_id',
         edit: false,
         add: false,
+        required: true,
         default: function() {
           if (this.template) {
             return this.template.currentState.dataSearchForm.node_name
@@ -158,7 +162,9 @@ export default {
         size: 'small',
         order: 3,
         placeholder: '请输入手机号',
-        use: 'input'
+        use: 'input',
+        required: true,
+        rules: [{ required: true, message: '请输入手机号', trigger: 'blur' }]
       }
     ],
     data: {},
@@ -175,6 +181,7 @@ export default {
         label: '用户搜索',
         order: 2,
         use: 'search',
+        placeholder: '根据姓名，手机号搜索',
         size: 'small'
       }
     ],

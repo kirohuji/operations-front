@@ -17,6 +17,7 @@ import * as filters from './filters' // global filters
 import LourdComponents from 'lourd_components'
 import ThenableProvider from 'lourd_components/src/plugins/thenable'
 import BaseSearch from './components/molecules/BaseSearch'
+import BaseImport from './components/molecules/BaseImport'
 import BaseCascader from './components/molecules/BaseCascader/cascader/src/cascader.vue'
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
@@ -27,7 +28,8 @@ Vue.use(ThenableProvider)
 Vue.use(LourdComponents, {
   baseEnter: {
     search: BaseSearch,
-    'base-cascader': BaseCascader
+    'base-cascader': BaseCascader,
+    'import': BaseImport
   }
 })
 Object.keys(filters).forEach((key) => {

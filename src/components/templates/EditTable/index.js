@@ -5,7 +5,13 @@ import emitter from 'element-ui/src/mixins/emitter'
 import { find } from 'lodash'
 export default {
   name: 'EditTable',
-  props: ['config'],
+  props: {
+    config: Object,
+    permission: {
+      type: Array,
+      default: () => []
+    }
+  },
   inject: {
     page: {
       from: 'page',
@@ -32,7 +38,7 @@ export default {
   },
   methods: {
     dialogClose() {
-      this.$refs.dialog.innerDialog()
+      this.$refs.dialog.innerDialogClose()
     },
     handleSubmit(payload) {
       this.$emit('events', {
@@ -91,7 +97,7 @@ export default {
         scopedSlots: true,
         select: '',
         value: '',
-        width: '100px',
+        width: '150px',
         current: null
       })
       this.hasOperation = true
@@ -112,7 +118,8 @@ export default {
                   (() => (
                     <el-button
                       type='primary'
-                      onClick={() =>
+                      onClick={() => {
+                        this.currentSelect = {}
                         this.handleDialog({
                           mode: 'add',
                           title: this.store.dialog.add,
@@ -121,7 +128,7 @@ export default {
                             data: {}
                           }
                         })
-                      }
+                      }}
                     >
                       {this.store.searcher.create}
                     </el-button>
@@ -144,26 +151,31 @@ export default {
               scopedSlots: {
                 operation: ({ row }) => (
                   <div class='operation' style='display: flex;justify-content: space-between;'>
-                    <el-link
-                      type='primary'
-                      disabled={row.disabled === 1}
-                      onClick={() =>
-                        this.handleOperation({
-                          row,
-                          mode: 'findOne'
-                        })
-                      }
-                    >
-                      编辑
-                    </el-link>
-
-                    <el-link
-                      type='primary'
-                      disabled={row.disabled === 1}
-                      onClick={() => this.handleOperation({ mode: 'trigger', row })}
-                    >
-                      {row.status === 'ban' ? '开启' : '禁用'}
-                    </el-link>
+                    {this.permission.includes('authorize') && <el-link type='primary'>授权</el-link>}
+                    {this.permission.includes('edit') && (
+                      <el-link
+                        type='primary'
+                        disabled={row.disabled === 1}
+                        onClick={() =>
+                          this.handleOperation({
+                            row,
+                            mode: 'findOne'
+                          })
+                        }
+                      >
+                        编辑
+                      </el-link>
+                    )}
+                    {this.permission.includes('effective') && (
+                      <el-link
+                        type='primary'
+                        disabled={row.disabled === 1}
+                        onClick={() => this.handleOperation({ mode: 'trigger', row })}
+                      >
+                        {row.status === 'ban' ? '开启' : '禁用'}
+                      </el-link>
+                    )}
+                    {this.permission.includes('remove') && <el-link type='danger'>删除</el-link>}
                   </div>
                 ),
                 ...this.$scopedSlots

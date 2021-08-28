@@ -4,7 +4,7 @@
       ref="editTable"
       v-loading="tableData.loading"
       :config="config"
-      :permission="['edit', 'effective', 'remove']"
+      :permission="['authorize', 'edit', 'effective', 'remove']"
       @events="handleEvents"
     />
   </div>
